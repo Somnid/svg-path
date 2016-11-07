@@ -62,6 +62,11 @@ const CanvasRenderer = (function() {
     }
 
     function setupStroke(options){
+      let options = Object.assign({}, {
+        strokeColor : "#000",
+        strokeWidth : 1,
+        fillColor : "#000"
+      }, options);
       this.context.strokeStyle = options.strokeColor;
       this.context.lineWidth = options.strokeWidth;
       this.context.fillStyle = options.fillColor;

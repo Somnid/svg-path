@@ -45,12 +45,12 @@ var InstructionSimplifier = (function(){
         };
     }
     function lineAbsolute(instructions, index, x, y){
-        let last = this.currentPoint;
-		this.currentPoint = { x, y };
+      let last = this.currentPoint;
+		  this.currentPoint = { x, y };
     	return {
-			type : "lineAbsolute",
-			points : [last.x, last.y, x, y]
-		};
+			  type : "lineAbsolute",
+			  points : [last.x, last.y, x, y]
+		  };
     }
     function lineRelative(instructions, index, dx, dy){
         var instruction = instructions[index];
