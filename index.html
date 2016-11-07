@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+	<head>
+		<title>SVG Path</title>
+		<link rel="stylesheet" href="css/index.css"></link>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	</head>
+	<body class="stack">
+		<div class="row">
+			<label for="mode">Mode:</label>
+			<select id="mode">
+				<option value="svg-path">SVG Path</option>
+				<option value="mvg">MVG</option>
+			</select>
+		</div>
+		<textarea id="input"></textarea>
+		<canvas id="canvas" height="480" width="640"></canvas>
+		<script src="js/lib/utilities.js"></script>
+		<script src="js/svg-path.js"></script>
+		<script src="js/instruction-simplifier.js"></script>
+		<script src="js/canvas-renderer.js"></script>
+		<script src="js/views/app-view.js"></script>
+		<script src="js/index.js"></script>
+	</body>
+</html>
