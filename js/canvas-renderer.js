@@ -62,7 +62,7 @@ const CanvasRenderer = (function() {
     }
 
     function setupStroke(options){
-      let options = Object.assign({}, {
+      options = Object.assign({}, {
         strokeColor : "#000",
         strokeWidth : 1,
         fillColor : "#000"
