@@ -1,11 +1,11 @@
-var AppView = (function(){
+const AppView = (function(){
 
 	function create(){
 		var appView = {};
 		bind(appView);
 		appView.init();
 		return appView;
-	}
+	};
 
 	function bind(appView){
 		appView.installServiceWorker = installServiceWorker.bind(appView);
@@ -14,6 +14,7 @@ var AppView = (function(){
 		appView.cacheDom = cacheDom.bind(appView);
 		appView.attachEvents = attachEvents.bind(appView);
 		appView.input = input.bind(appView);
+    appView.resize = resize.bind(appView);
 		appView.init = init.bind(appView);
 	}
 
@@ -37,29 +38,49 @@ var AppView = (function(){
 		this.dom = {};
 		this.dom.canvas = document.querySelector("#canvas");
 		this.dom.input = document.querySelector("#input");
+    this.dom.strokeStyle = document.querySelector("#stroke-style");
+    this.dom.strokeWidth = document.querySelector("#stroke-width");
+    this.dom.fillColor = document.querySelector("#fill-color");
 	}
 
 	function attachEvents(){
 		this.dom.input.addEventListener("input", this.input);
+    this.dom.strokeStyle.addEventListener("input", this.input);
+    this.dom.strokeWidth.addEventListener("input", this.input);
+    this.dom.fillColor.addEventListener("input", this.input);
+    window.addEventListener("resize", this.resize);
 	}
 
 	function input(){
-		var value = this.dom.input.value;
-		var instructionList = this.svgPath.parsePath(value);
+		let value = this.dom.input.value;
+		let instructionList = this.svgPathParser.parsePath(value);
 		instructionList = this.instructionSimplifier.simplifyInstructions(instructionList);
 		this.canvasRenderer.clear();
-		this.canvasRenderer.drawInstructionList(instructionList);
+		this.canvasRenderer.drawInstructionList(instructionList, {
+      strokeColor : this.dom.strokeStyle.value,
+      strokeWidth : this.dom.strokeWidth.value,
+      fillColor : this.dom.fillColor.value
+    });
 	}
+
+  function resize(){
+    let canvasEdges = this.dom.canvas.getBoundingClientRect();
+
+    this.dom.canvas.width = canvasEdges.width;
+    this.dom.canvas.height = canvasEdges.height;
+    this.input();
+  }
 
 	function init(){
 		//this.installServiceWorker();
 		this.cacheDom();
 		this.attachEvents();
-		this.svgPath = SvgPath.create();
+		this.svgPathParser = SvgPathParser.create();
 		this.instructionSimplifier = InstructionSimplifier.create();
 		this.canvasRenderer = CanvasRenderer.create({
 			canvas : this.dom.canvas
 		});
+    this.resize();
 	}
 
 	return {

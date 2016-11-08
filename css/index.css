@@ -5,6 +5,12 @@ body,html {
   margin : 0px;
   padding: 0px;
   font-family: arial;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 label, button, textarea, input {
@@ -46,7 +52,7 @@ dialog {
 }
 
 canvas {
-	background-image:  linear-gradient(0deg, #000 50%, transparent 50%), 
+	background-image:  linear-gradient(0deg, #000 50%, transparent 50%),
 }
 
 .row{
@@ -90,4 +96,24 @@ canvas {
 	border: 1px solid #0000cc;
 	padding: 5px;
 	margin-bottom: 10px;
+}
+.options {
+  flex-basis: 100%;
+  flex-shrink: 0;
+}
+.options > * {
+  margin-right: 20px;
+}
+.panels {
+  flex-grow: 1;
+}
+#canvas {
+  flex-basis: 50%;
+  height: calc(100% - 20px);
+  flex-grow: 0;
+}
+#input {
+  flex-basis: 50%;
+  height: calc(100% - 20px);
+  flex-grow: 0;
 }
